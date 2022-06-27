@@ -3,11 +3,11 @@
 - Exam Guide helps to prepare well for exams.
 
 ``` 
-The Idea behind creating this project is well most of the UG students prepare a day or couple of days before
-the exams and it is obivious with me also. so we actually share all the resources in the whatsapp
-where a person is limited with only the resource shared by his few friends this web application would
-store all the resources shared by many people at one place and they can also edit the resource or delete
-it permanently if it is unnecessary.
+The Idea behind creating this project is well most of the UG students prepare a day or couple 
+of days before the exams and it is obivious with me also. so we actually share all the resources 
+in the whatsapp where a person is limited with only the resource shared by his few friends this 
+web application would store all the resources shared by many people at one place and they can 
+also edit the resource or delete it permanently if it is unnecessary.
 
 ```
 

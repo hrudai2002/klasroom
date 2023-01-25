@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
 
 const fetchData = async (id) => {
-  return await axios
-    .get(`https://exam-guide-viit.herokuapp.com/${id}`)
-    .then((res) => res.data);
+  return await axios.get(`http://localhost:5000/${id}`).then((res) => res.data);
 };
 
 const ResourcePage = () => {
@@ -31,7 +29,7 @@ const ResourcePage = () => {
 
   const updateRequest = async () => {
     await axios
-      .patch(`https://exam-guide-viit.herokuapp.com/${id}`, {
+      .patch(`http://localhost:5000/${id}`, {
         title: String(data.title),
         year: Number(data.year),
         branch: String(data.branch),
@@ -44,12 +42,12 @@ const ResourcePage = () => {
     e.preventDefault();
     updateRequest()
       .then(() => setUpdate(false))
-      .then(() => navigate(`/`))
+      .then(() => navigate(`/`));
   };
 
   const deleteHandler = async () => {
     return await axios
-      .delete(`https://exam-guide-viit.herokuapp.com/${id}`)
+      .delete(`http://localhost:5000/${id}`)
       .then((res) => res.data)
       .then(() => navigate("/"));
   };
@@ -57,7 +55,6 @@ const ResourcePage = () => {
   useEffect(() => {
     fetchData(id).then((data) => setData(data.resource));
   }, [id]);
-
 
   return update ? (
     <div className="add-resource">

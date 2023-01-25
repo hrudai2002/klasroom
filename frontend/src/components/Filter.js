@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Resource from "./resource/Resource";
 
-const URL = "https://exam-guide-viit.herokuapp.com/";
+const URL = "http://localhost:5000/";
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
 };

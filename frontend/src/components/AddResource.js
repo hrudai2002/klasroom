@@ -18,7 +18,7 @@ const AddResource = () => {
   };
   const sendRequest = async () => {
     await axios
-      .post("https://exam-guide-viit.herokuapp.com/", {
+      .post("http://localhost:5000/", {
         title: String(inputs.title),
         year: Number(inputs.year),
         branch: String(inputs.branch),

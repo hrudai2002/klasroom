@@ -1,0 +1,17 @@
+:host {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    height: 100vh;
+}
+
+.About {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+
+    div {
+        padding: 140px;
+        font-size: 30px;
+    }
+}

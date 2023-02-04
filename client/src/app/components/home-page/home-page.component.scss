@@ -1,0 +1,133 @@
+:host {
+    list-style: none;
+}
+
+.mb-15p {
+    margin-bottom: 15px;
+}
+
+.cyan {
+    border-top: 3px solid hsl(180, 62%, 55%);
+}
+
+.red {
+    border-top: 3px solid hsl(0, 78%, 62%);
+}
+
+.blue {
+    border-top: 3px solid hsl(212, 86%, 64%);
+}
+
+.orange {
+    border-top: 3px solid hsl(34, 97%, 64%);
+}
+
+.header-context {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px;
+
+    .header-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .btn {
+            font-size: 20px;
+            margin: 0 auto;
+        }
+    }
+}
+
+.filter {
+    margin: 100px; 
+    .filter-div {
+        border-radius: 2px;
+        padding: 10px;
+
+        .filter-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+
+            .form-text {
+                font-size: 18px;
+            }
+
+            select {
+                border-radius: 5px;
+                border: 1px solid #f5f5f5;
+                padding: 4px;
+            }
+        }
+
+        .filter-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+
+            .btn {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .box {
+        border-radius: 5px;
+        box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
+        padding: 30px;
+        margin: 20px;
+
+        p {
+            color: hsl(229, 6%, 66%);
+        }
+    }
+
+    img {
+        float: right;
+    }
+}
+
+@media (max-width: 994px) {
+    .resources-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 950px) {
+    .row2-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box {
+        width: 80%;
+    }
+}
+
+@media (max-width: 512px) {
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .box {
+        height: 300px;
+    }
+}
+
+
+@media screen and (max-width: 430px) {
+    .sm-sn {
+        font-size: 35px;
+    }
+}

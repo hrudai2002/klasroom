@@ -1,0 +1,63 @@
+<div style='background-color: #F5F5F5'>
+    <div class="container">
+        <div class="header-context">
+            <div>
+              <h1 class="sm-sn mb-15p"> Exam Guide</h1>
+              <p>🔷 Now Preparing for exam is easy</p>
+              <p>🔷 Share your resources with your friends </p>
+              <div class="header-button">
+                <button class="btn btn-outline-primary" (click)="navigateToAddResource()">Add Resource 📤</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter
+<div class="filter">
+    <div class="container">
+        <div class="bg-light filter-div">
+            <form class="filter-form">
+              <div class="year">
+                <h4 class="form-text">Year</h4>
+                <select name="year" id="year" onChange={handleChange}>
+                  <option>select...</option>
+                  <option value="1">{{YEAR.FIRST_YEAR}}</option>
+                  <option value="2">{{YEAR.SECOND_YEAR}}</option>
+                  <option value="3">{{YEAR.THIRD_YEAR}}</option>
+                  <option value="4">{{YEAR.FOURTH_YEAR}}</option>
+                </select>
+              </div>
+              <div class="branch">
+                <h4 class="form-text"> Branch </h4>
+                <select name="branch" id="branch" onChange={handleChange}>
+                  <option>select...</option>
+                  <option value=`${BRANCH.CSE}`>{{BRANCH.CSE}}</option>
+                  <option value=`${ECE}`>{{BRANCH.ECE}}</option>
+                  <option value=`${EEE}`>{{BRANCH.EEE}}</option>
+                  <option value=`${ME}`>{{BRANCH.ME}}</option>
+                </select>
+              </div>
+            </form>
+            <div class="filter-btn">
+              <button type="submit"  class="btn btn-primary">Submit</button>
+              <button class="btn btn-secondary">Reset</button>
+            </div>
+          </div>
+    </div>
+</div> -->
+
+ <div class="resources-grid container">
+  <li *ngFor="let resource of resources">
+    <div class="row2-container">
+      <div class="box" [class]="color(resource.branch)" (click)="navigateToResource(resource._id)" style = "cursor: pointer;">
+        <h2>{{resource.title}}</h2>
+        <p>
+          {{resource.year}}{{year(resource.year)}} Year
+        </p>
+        <p>{{resource.branch}}</p>
+        <img [src]="image(resource.branch)"/>
+      </div>
+    </div>
+  </li>
+ </div>

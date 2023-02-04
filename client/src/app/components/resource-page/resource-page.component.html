@@ -1,0 +1,81 @@
+<ng-container *ngIf="updateResourcePage">
+ <div class="add-resource">
+  <div class="p-30" style="background-color: #f5f5f5">
+    <h1 class="text-center">Resource 📤</h1>
+    <form class="add-form" [formGroup]="addResource" (ngSubmit)="onSubmit()">
+        <div class="add-form-elements">
+        <h5>Title</h5>
+        <input type="text" name="title" placeholder=" Title.." formControlName="title" required/>
+        </div>
+        <div class="add-form-elements">
+        <h5>Year</h5>
+        <select name="year" id="year" formControlName="year" required>
+            <option value="1">{{YEAR.FIRST_YEAR}}</option>
+            <option value="2">{{YEAR.SECOND_YEAR}}</option>
+            <option value="3">{{YEAR.THIRD_YEAR}}</option>
+            <option value="4">{{YEAR.FOURTH_YEAR}}</option>
+        </select>
+        </div>
+        <div class="add-form-elements">
+        <h5>Branch</h5>
+        <select name="branch" formControlName="branch" required>
+            <option [value]='BRANCH.CSE'>{{BRANCH.CSE}}</option>
+            <option [value]='BRANCH.ECE'>{{BRANCH.ECE}}</option>
+            <option [value]='BRANCH.EEE'>{{BRANCH.EEE}}</option>
+            <option [value]='BRANCH.ME'>{{BRANCH.ME}}</option>
+        </select>
+        </div>
+        <div class="add-form-elements">
+        <h5>Description
+            <span style="font-size: 15px">
+            ( use markdown
+            <a href="https://wordpress.com/support/markdown-quick-reference/" style="text-decoration: none" target="_blank" rel="noreferrer">know more</a>
+            )
+            </span>
+        </h5>
+        <textarea type="text" name="description" placeholder=" Description..." formControlName="description" required></textarea>
+        </div>
+        <div class="add-form-elements">
+        <input type="submit" class="add-btn btn btn-primary" value="Submit"/>
+        </div>
+        <div class="add-form-elements add-alert alert alert-success">
+        <p>
+            Share the resource which you feel helpful and don't share any
+            unnecessary stuff here.
+        </p>
+        </div>
+    </form>
+  </div>
+</div>
+</ng-container>
+<ng-container *ngIf="!updateResourcePage">
+    <div class="resource-page">
+      <div class="alert alert-danger" role="alert" style="margin-top: 10px">
+        <p>
+          You can edit this article using the pencil icon and delete this post
+          using the bin icon
+          <br />
+          Note: Before editing or deleting the article discuss with your fellow
+          classmates and then proceed
+        </p>
+      </div>
+      <div>
+        <div class="resource-div">
+          <h1 class="title">{{resource.title}}</h1>
+          <h3 class="tag btn bg-light">
+            {{resource.year}} {{year(resource.year)}} year
+          </h3>
+          <h3 class="tag btn bg-light">{{resource.branch}}</h3>
+          <h3 class="tag btn bg-light" (click)='updateResourcePage=true'>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </h3>
+          <h3 class="tag btn bg-light" (click)="deleteResource()">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </h3>
+
+          <p [innerHtml]="convertedMarkDown" class="desc">
+          </p>
+        </div>
+      </div>
+    </div>
+</ng-container>

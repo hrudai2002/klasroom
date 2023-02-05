@@ -19,12 +19,13 @@ const getAllResources = async (req, res) => {
 
 const addResource = async (req, res) => {
   try {
-    const { title, year, branch, description } = req.body;
+    const { title, year, branch, description, user } = req.body;
     const resource = new Resource({
       title,
       year,
       branch,
       description,
+      user
     });
     await resource.save(); 
     return res.status(200).send({

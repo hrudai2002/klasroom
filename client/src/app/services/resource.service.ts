@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'; 
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,23 +8,25 @@ import { HttpClient } from '@angular/common/http';
 export class ResourceService {
 
   api_url = 'http://localhost:5000/resource/'; 
-  
-  constructor(
-    private http: HttpClient
-  ) { }
+  user = this.authService.getUser();
 
+  constructor(
+    private http: HttpClient, 
+    private authService : AuthService
+  ) { }
+  
+    
   getAllResources() {
     return this.http.get(this.api_url);
   }
 
   addResource(data: any) {
-    return this.http.post(this.api_url, data);
+    return this.http.post(this.api_url, {...data, user: this.user});
   }
 
   getResource(id : any) {
     return this.http.get(this.api_url + `${id}`);
   }
-
 
   updateResource(id: any, data : any) {
     return this.http.patch(this.api_url + `${id}`, data);

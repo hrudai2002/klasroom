@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card rounded-0 my-5" *ngIf="!userRegistered">
+            <div class="card-header mb-0">
+                <h3>Register</h3>
+            </div>
+            <div class="card-body">
+
+                <form class="form">
+                    <div class="form-group">
+                        <label for=""><strong>Email</strong></label>
+                        <input type="email" name="email" name="email" [(ngModel)]="registerUserData.email" class="form-control rounded-0" required>
+                        <small class="text-danger" *ngIf="alreadyRegistered">Email already exist.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for=""><strong>Password</strong></label>
+                        <input type="password" name="password" [(ngModel)]="registerUserData.password" class="form-control rounded-0" required>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="button" (click)="registerUser()" class="btn btn-outline-primary my-3">Submit</button>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- After submission message -->
+        <div class="card rounded-0 my-5 text-center" *ngIf="userRegistered">
+            <div class="card-header mb-0">
+                <h3>Success</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Your registration was successful</strong></p>
+                <p><strong>Please proceed to login</strong></p>
+                <a href="/login" class="btn btn-outline-success m2">Login</a>
+            </div>
+        </div>
+
+    </div>
+</div>

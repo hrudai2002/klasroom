@@ -66,10 +66,10 @@
             {{resource.year}} {{year(resource.year)}} year
           </h3>
           <h3 class="tag btn bg-light">{{resource.branch}}</h3>
-          <h3 class="tag btn bg-light" (click)='updateResourcePage=true'>
+          <h3 class="tag btn bg-light" (click)='updateResourcePage=true' *ngIf="updateAccess">
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </h3>
-          <h3 class="tag btn bg-light" (click)="deleteResource()">
+          <h3 class="tag btn bg-light" (click)="deleteResource()" *ngIf="deleteAccess">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </h3>
 

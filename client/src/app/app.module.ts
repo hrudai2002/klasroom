@@ -11,6 +11,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddResourcePageComponent } from './components/add-resource-page/add-resource-page.component';
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { ResourcePageComponent } from './components/resource-page/resource-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthToastComponent } from './toasts/auth-toast/auth-toast.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { ResourcePageComponent } from './components/resource-page/resource-page.
     NavbarComponent,
     AddResourcePageComponent,
     AboutPageComponent,
-    ResourcePageComponent
+    ResourcePageComponent,
+    LoginComponent,
+    RegisterComponent,
+    AuthToastComponent
   ],
   imports: [
     HttpClientModule,

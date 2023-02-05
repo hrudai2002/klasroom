@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ResourceService } from 'src/app/services/resource.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { YEAR, BRANCH } from 'src/app/enums/enum';
 import {marked} from 'marked';
 
@@ -18,10 +19,14 @@ export class ResourcePageComponent implements OnInit {
   convertedMarkDown = '';
   updateResourcePage : boolean = false;
   resource: any = [];
+  currUser : any;
+  deleteAccess: boolean = false;
+  updateAccess: boolean = false;
 
   constructor(
     private formBuilder : FormBuilder, 
     private resourceService : ResourceService,
+    private authService: AuthService,
     private router : ActivatedRoute, 
     private _router: Router,
   ) {
@@ -34,6 +39,7 @@ export class ResourcePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currUser = this.authService.getUser();
     this.getData();
   }
 
@@ -44,6 +50,10 @@ export class ResourcePageComponent implements OnInit {
         this.convertedMarkDown = marked(res.data.description);
         this.resource = res.data; 
         this.addResource.patchValue(res.data);
+        if(this.resource.user === this.currUser) {
+          this.deleteAccess = true;
+          this.updateAccess = true;
+        }
       }
     })
   }

@@ -1,6 +1,6 @@
-# Exam-Guide 📖
-- Exam Guide is web application where everyone can share their exam resources with one another. 
-- Exam Guide helps to prepare well for exams.
+# Klasroom 
+- klassroom is web application where everyone can share their exam resources with one another. 
+- klassroom helps to prepare well for exams.
 
 ``` 
 The Idea behind creating this project is well most of the UG students prepare a day or couple 

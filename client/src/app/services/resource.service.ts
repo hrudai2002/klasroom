@@ -20,6 +20,10 @@ export class ResourceService {
     return this.http.get(this.api_url);
   }
 
+  getFilteredResources(query: any) {
+    return this.http.post(this.api_url + 'filter', query)
+  }
+
   addResource(data: any) {
     return this.http.post(this.api_url, {...data, user: this.user});
   }

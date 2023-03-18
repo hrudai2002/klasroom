@@ -2,15 +2,41 @@
     margin-bottom: 5px;
 }
 
-.fa-book, .fa-plus-circle {
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 20px;
+.navbar {
+    background-color: #282828 !important;
 }
 
-.fa-question-circle {
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
+.logo {
+    font-family: 'Roboto Mono', monospace;
 }
+
+
+.fa-question-circle, .fa-circle-user {
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.authIcons:hover {
+    background-color: #cccccc
+}
+
+
+
+// ::ng-deep {
+//     .cdk-overlay-connected-position-bounding-box {
+//         position: absolute;
+//         left: unset;
+//         right: 25px !important;
+//         top: 6% !important;     
+//         height: 50px !important;
+//         width: 190px !important;
+        
+//     }
+//     .mat-mdc-menu-panel.mat-mdc-menu-panel {
+//         background-color: #fcfcfc !important;
+//         border: 2px solid #ccc;
+//         width: 190px !important;
+//     }
+// }

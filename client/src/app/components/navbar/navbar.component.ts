@@ -1,25 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service'
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+
+  isLogged : boolean = false;
+
   constructor(
-    private router : Router
+    private router : Router,
+    private authService : AuthService,
+    private toastr: ToastrService
   ){}
 
-  navigateToHome() {
-    this.router.navigate(['/']);
+  ngOnInit(): void {
+    this.isLogged = this.authService.loggedIn();
   }
 
-  navigateToAddResource() {
-    this.router.navigate(['/add']);
+  navigateTo(navigate: string) {
+    this.router.navigate([navigate]);
   }
 
-  navigateToAbout() {
-    this.router.navigate(['/about']);
+  logOut() {
+    this.authService.logoutUser();
+    this.toastr.success('SuccessFully Logged Out');
+    this.isLogged = this.authService.loggedIn();
   }
 }
 

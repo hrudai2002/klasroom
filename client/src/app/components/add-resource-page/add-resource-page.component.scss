@@ -1,24 +1,29 @@
 .p-30 {
     padding: 30px !important;
 }
+
 .add-resource {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 30px;
+
     .add-form-elements {
         margin: 10px;
+
         .add-btn,
-            select,
-            input {
-                width: 400px;
-                height: 40px;
-            }
+        select,
+        input {
+            width: 400px;
+            height: 40px;
+        }
+
         textarea {
             width: 400px;
             height: 100px;
         }
+
         input,
         textarea {
             padding: 5px;
@@ -28,4 +33,16 @@
     .add-alert {
         width: 400px;
     }
+}
+
+:host ::ng-deep {
+    .mat-mdc-form-field {
+        width: 100%;
+    }
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        background-color: #fff !important;
+    }
+        .mdc-text-field--filled:not(.mdc-text-field--disabled):hover {
+            background-color: #fff !important;
+        }
 }

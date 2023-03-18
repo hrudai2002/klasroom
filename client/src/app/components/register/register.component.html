@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card rounded-0 my-5" *ngIf="!userRegistered">
@@ -8,9 +9,12 @@
 
                 <form class="form">
                     <div class="form-group">
+                        <label for=""><strong>Name</strong></label>
+                        <input type="text" name="name" name="name" [(ngModel)]="registerUserData.name" class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
                         <label for=""><strong>Email</strong></label>
                         <input type="email" name="email" name="email" [(ngModel)]="registerUserData.email" class="form-control rounded-0" required>
-                        <small class="text-danger" *ngIf="alreadyRegistered">Email already exist.</small>
                     </div>
                     <div class="form-group">
                         <label for=""><strong>Password</strong></label>

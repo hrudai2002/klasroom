@@ -5,13 +5,23 @@
 }
 
 .About {
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: center;
+    margin-right: 20%;
+    margin-left: 10%;
+    margin-top: 5%;
 
-    div {
-        padding: 140px;
+    .fa-circle {
+        font-size: 15px;
+    }
+
+    .questions {
+        padding: 10px;
         font-size: 30px;
+
+        .heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+       
     }
 }

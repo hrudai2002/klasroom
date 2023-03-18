@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResourceService } from 'src/app/services/resource.service';
 import { ResourceResponse } from 'src/app/interfaces/resource-response.interface';
-import { YEAR, BRANCH } from 'src/app/enums/enum';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-home-page',
@@ -10,12 +11,30 @@ import { YEAR, BRANCH } from 'src/app/enums/enum';
   styleUrls: ['./home-page.component.scss']
 })
 
+
 export class HomePageComponent implements OnInit {
-  YEAR : any = YEAR; 
-  BRANCH: any = BRANCH;
   resources: any = [];
+  selectedValue: any;
+  filterYear = [];
+  filterBranch = [];
+  searchTerm='';
 
 
+   yearArray  = [
+    {value: '1', active: false},
+    {value: '2', active: false},
+    {value: '3', active: false},
+    {value: '4', active: false}
+   ];
+   branchArray : any = [
+    {value: 'cse', active: false},
+    {value: 'ece', active: false},
+    {value: 'mech', active: false},
+    {value: 'it', active: false}
+   ];
+
+   yearTags = ['00', 'st', 'nd', 'rd', 'th']
+   
   constructor(
     private router : Router,
     private resourceService : ResourceService
@@ -25,32 +44,43 @@ export class HomePageComponent implements OnInit {
     this.resourceService.getAllResources().subscribe((res: any) => {
       let resourceResponse = res as ResourceResponse;
       if(resourceResponse.success){
-        this.resources = resourceResponse.data;
+        this.resources = resourceResponse.data; 
+
+        for(let data of this.resources) {
+          const date = this.resources.date; 
+          const formattedDate = moment(date).format('DD-MMM'); 
+          const newFormattedDate = formattedDate.replace('-', ' ');
+          data['formattedDate'] = newFormattedDate;
+        }
       }
     });
   }
 
-  year(year: number) : any {
-    if (year === 1) return "st";
-    if (year === 2) return "nd";
-    if (year === 3) return "rd";
-    if (year === 4) return "th";
-  }
-
-  color(branch: string) : any {
-    if (branch === BRANCH.CSE) return "blue";
-    if (branch === BRANCH.ECE) return "orange";
-    if (branch === BRANCH.EEE) return "red";
-    if (branch === BRANCH.ME) return "cyan";
-  }
-
-  image(branch: string) : any {
-    if (branch === BRANCH.CSE) return "https://assets.codepen.io/2301174/icon-calculator.svg";
-    if (branch === BRANCH.ECE) return "https://assets.codepen.io/2301174/icon-karma.svg";
-    if (branch === BRANCH.EEE) return "https://assets.codepen.io/2301174/icon-team-builder.svg";
-    if (branch === BRANCH.ME) return "https://assets.codepen.io/2301174/icon-supervisor.svg";
-  }
+  onYearFilterChange() {
+    let params = {
+      year: this.filterYear,
+      branch: this.filterBranch
+    }
   
+    this.resourceService.getFilteredResources(params).subscribe((res : any) => {
+      if(res.success) {
+        this.resources = res.data;
+      }
+    })
+  }
+
+  onBranchFilterChange() {
+    let params = {
+      year: this.filterYear,
+      branch: this.filterBranch
+    }
+    this.resourceService.getFilteredResources(params).subscribe((res : any) => {
+      if(res.success) {
+         this.resources = res.data;
+      }
+    })
+  }
+
   navigateToAddResource() {
     this.router.navigate(['/add']);
   }

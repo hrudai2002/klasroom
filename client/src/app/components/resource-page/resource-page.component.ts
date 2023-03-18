@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ResourceService } from 'src/app/services/resource.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { YEAR, BRANCH } from 'src/app/enums/enum';
 import {marked} from 'marked';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-resource-page',
@@ -19,15 +20,31 @@ export class ResourcePageComponent implements OnInit {
   convertedMarkDown = '';
   updateResourcePage : boolean = false;
   resource: any = [];
-  currUser : any;
-  deleteAccess: boolean = false;
-  updateAccess: boolean = false;
+  author: string = '';
+  date: any;
+
+  permission: boolean = false;
+
+
+  yearArray  = [
+    {value: '1', active: false},
+    {value: '2', active: false},
+    {value: '3', active: false},
+    {value: '4', active: false}
+  ];
+
+  branchArray = [
+    {value: 'cse', active: false},
+    {value: 'ece', active: false},
+    {value: 'mech', active: false},
+    {value: 'it', active: false}
+   ];
 
   constructor(
     private formBuilder : FormBuilder, 
     private resourceService : ResourceService,
-    private authService: AuthService,
     private router : ActivatedRoute, 
+    private authService : AuthService,
     private _router: Router,
   ) {
      this.addResource = this.formBuilder.group({
@@ -39,21 +56,32 @@ export class ResourcePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currUser = this.authService.getUser();
     this.getData();
   }
+
+  getFormattedDate(date: any) {
+    const formattedDate = moment(date).format('DD-MMM'); 
+    const newFormattedDate = formattedDate.replace('-', ' '); 
+    this.date = newFormattedDate;
+}
 
   getData() {
     let resourceId = this.router.snapshot.params['id'];
     this.resourceService.getResource(resourceId).subscribe((res : any) => {
       if(res.success) {
-        this.convertedMarkDown = marked(res.data.description);
-        this.resource = res.data; 
-        this.addResource.patchValue(res.data);
-        if(this.resource.user === this.currUser) {
-          this.deleteAccess = true;
-          this.updateAccess = true;
-        }
+        const data = res.data[0]; 
+        const user = this.authService.getUser();
+        this.getFormattedDate(res.data[0].date);
+        this.permission = data.user._id === user ? true : false;
+        this.convertedMarkDown = marked(data.description);
+        this.resource = data; 
+        this.author = data.user.name;
+        this.addResource = this.formBuilder.group({
+          title: data.title, 
+          year: data.year.toString(), 
+          branch: data.branch, 
+          description: data.description
+        })
       }
     })
   }

@@ -1,29 +1,34 @@
+<app-navbar></app-navbar>
 <ng-container *ngIf="updateResourcePage">
  <div class="add-resource">
   <div class="p-30" style="background-color: #f5f5f5">
     <h1 class="text-center">Resource 📤</h1>
     <form class="add-form" [formGroup]="addResource" (ngSubmit)="onSubmit()">
         <div class="add-form-elements">
-        <h5>Title</h5>
-        <input type="text" name="title" placeholder=" Title.." formControlName="title" required/>
+          <mat-form-field class="example-full-width" >
+                  <mat-label>Enter Title</mat-label>
+                  <input formControlName="title" matInput placeholder="Title">
+            </mat-form-field>
         </div>
         <div class="add-form-elements">
-        <h5>Year</h5>
-        <select name="year" id="year" formControlName="year" required>
-            <option value="1">{{YEAR.FIRST_YEAR}}</option>
-            <option value="2">{{YEAR.SECOND_YEAR}}</option>
-            <option value="3">{{YEAR.THIRD_YEAR}}</option>
-            <option value="4">{{YEAR.FOURTH_YEAR}}</option>
-        </select>
+          <mat-form-field appearance="fill">
+              <mat-label>Select Year</mat-label>
+              <mat-select formControlName="year">
+                  <mat-option *ngFor="let year of yearArray" [value]="year.value">
+                  {{year.value}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
         </div>
         <div class="add-form-elements">
-        <h5>Branch</h5>
-        <select name="branch" formControlName="branch" required>
-            <option [value]='BRANCH.CSE'>{{BRANCH.CSE}}</option>
-            <option [value]='BRANCH.ECE'>{{BRANCH.ECE}}</option>
-            <option [value]='BRANCH.EEE'>{{BRANCH.EEE}}</option>
-            <option [value]='BRANCH.ME'>{{BRANCH.ME}}</option>
-        </select>
+         <mat-form-field appearance="fill">
+                <mat-label>Select Branch</mat-label>
+                <mat-select formControlName="branch">
+                    <mat-option *ngFor="let branch of branchArray" [value]="branch.value">
+                    {{branch.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
         <div class="add-form-elements">
         <h5>Description
@@ -33,7 +38,10 @@
             )
             </span>
         </h5>
-        <textarea type="text" name="description" placeholder=" Description..." formControlName="description" required></textarea>
+         <mat-form-field class="example-full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
         </div>
         <div class="add-form-elements">
         <input type="submit" class="add-btn btn btn-primary" value="Submit"/>
@@ -50,31 +58,23 @@
 </ng-container>
 <ng-container *ngIf="!updateResourcePage">
     <div class="resource-page">
-      <div class="alert alert-danger" role="alert" style="margin-top: 10px">
-        <p>
-          You can edit this article using the pencil icon and delete this post
-          using the bin icon
-          <br />
-          Note: Before editing or deleting the article discuss with your fellow
-          classmates and then proceed
-        </p>
-      </div>
       <div>
         <div class="resource-div">
           <h1 class="title">{{resource.title}}</h1>
           <h3 class="tag btn bg-light">
-            {{resource.year}} {{year(resource.year)}} year
+            {{resource.year}}{{year(resource.year)}} year
           </h3>
           <h3 class="tag btn bg-light">{{resource.branch}}</h3>
-          <h3 class="tag btn bg-light" (click)='updateResourcePage=true' *ngIf="updateAccess">
+          <h3 class="tag btn bg-light" *ngIf="permission" (click)='updateResourcePage=true'>
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </h3>
-          <h3 class="tag btn bg-light" (click)="deleteResource()" *ngIf="deleteAccess">
+          <h3 class="tag btn bg-light" *ngIf="permission" (click)="deleteResource()">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </h3>
+          <p>{{"- " + author}}</p>
 
-          <p [innerHtml]="convertedMarkDown" class="desc">
-          </p>
+          <div [innerHtml]="convertedMarkDown" class="desc">
+          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ResourceService } from 'src/app/services/resource.service';
 import { ResourceResponse } from 'src/app/interfaces/resource-response.interface';
+import { Router } from '@angular/router';
 import { YEAR, BRANCH } from 'src/app/enums/enum';
 
 @Component({
@@ -15,10 +15,24 @@ export class AddResourcePageComponent implements OnInit {
   BRANCH: any = BRANCH;
   addResource: FormGroup;
 
+  yearArray  = [
+    {value: '1', active: false},
+    {value: '2', active: false},
+    {value: '3', active: false},
+    {value: '4', active: false}
+  ];
+
+  branchArray = [
+    {value: 'cse', active: false},
+    {value: 'ece', active: false},
+    {value: 'mech', active: false},
+    {value: 'it', active: false}
+   ];
+
   constructor(
     private formBuilder : FormBuilder, 
     private resourceService : ResourceService,
-    private router : Router
+    private _router : Router
   ){
     this.addResource = this.formBuilder.group({
       title: ['', Validators.required], 
@@ -35,7 +49,7 @@ export class AddResourcePageComponent implements OnInit {
     this.resourceService.addResource(this.addResource.value).subscribe((res: any) => {
       let resourceResponse = res as ResourceResponse; 
       if(resourceResponse.success) {
-        this.router.navigate(['']);
+        this._router.navigate([''])  
       }
     })
   }

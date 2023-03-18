@@ -49,6 +49,7 @@ const registerUser = async (req, res) => {
             }
             bcrypt.hash(userData.password, 10).then( async (hashedPassword) => {
                 let newUser = new User({
+                    name: userData.name,
                     email: userData.email, 
                     password: hashedPassword,
                 })

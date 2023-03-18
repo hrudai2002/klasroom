@@ -19,6 +19,9 @@ const resourceSchema = new Schema({
         type: String,
         required: true
     },
+    date: {
+        type: Date
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user'

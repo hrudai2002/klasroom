@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core'; 
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { app } from '../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourceService {
 
-  api_url = 'http://localhost:5000/resource/'; 
+  api_url = app.apiUrl + 'resource/'; 
   user = this.authService.getUser();
 
   constructor(
